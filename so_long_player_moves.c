@@ -137,53 +137,9 @@ void    destroy_enemy(t_game *game)
     }
 }
 
-int    slimes_animation(t_game *game)
-{
-    int count;
-    int	i;
-	int	j;
-	int	img_width;
-	int	img_height;
-	
-    count = 0;
-    //while (count <= 100)
-	//{
-        printf("test\n");
-        usleep(1000);
-        /*i = 0;
-        while (game->map.goodmap[i] != NULL)
-        {
-            j = 0;
-            while (game->map.goodmap[i][j] != '\n')
-            {
-                if (game->map.goodmap[i][j] == 'C')
-                {
-                    //manage_image(game, "sprites/Slime1.xpm", i, j);
-                    mlx_put_image_to_window(game->window.mlx, game->window.win, game->img_c, img_width * j, img_height * i);
-                    usleep(10000);
-                    mlx_put_image_to_window(game->window.mlx, game->window.win, game->img_c1, img_width * j, img_height * i);
-                    usleep(10000);
-                    mlx_put_image_to_window(game->window.mlx, game->window.win, game->img_c2, img_width * j, img_height * i);
-                    usleep(10000);
-                    mlx_put_image_to_window(game->window.mlx, game->window.win, game->img_c3, img_width * j, img_height * i);
-                    usleep(10000);
-                    mlx_put_image_to_window(game->window.mlx, game->window.win, game->img_c4, img_width * j, img_height * i);
-                    usleep(10000);
-                    mlx_put_image_to_window(game->window.mlx, game->window.win, game->img_c5, img_width * j, img_height * i);
-                    usleep(10000);
-                }
-                j++;
-            }
-            j = 0;
-            i++;
-        }
-        count++;
-    }*/
-    return(0);
-}
-
 int	move_player(int keycode, t_game *game)
 {
+    	display_c(game);
 	if (keycode == 100 && game->map.goodmap[game->player.x][game->player.y + 1] != '1')
         move_right(game);
     if (keycode == 97 && game->map.goodmap[game->player.x][game->player.y - 1] != '1')
@@ -200,6 +156,5 @@ int	move_player(int keycode, t_game *game)
     if (keycode == 32 && ((game->map.goodmap[game->player.x + 1][game->player.y] == 'X') || (game->map.goodmap[game->player.x - 1][game->player.y] == 'X') 
         || (game->map.goodmap[game->player.x][game->player.y + 1] == 'X') || (game->map.goodmap[game->player.x][game->player.y - 1] == 'X')))
         destroy_enemy(game);
-    //slimes_animation(game);
 	return (0);
 }

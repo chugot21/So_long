@@ -76,31 +76,37 @@ void	display_c(t_game *game)
 {
 	int	i;
 	int	j;
+	//int x;
 	int		img_width;
 	int		img_height;
 	
+	//x = 0;
 	i = 0;
 	j = 0;
-	game->img_c = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime1.xpm", &img_width, &img_height);
-	game->img_c1 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime2.xpm", &img_width, &img_height);
-	game->img_c2 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime3.xpm", &img_width, &img_height);
-	game->img_c3 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime4.xpm", &img_width, &img_height);
-	game->img_c4 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime5.xpm", &img_width, &img_height);
-	game->img_c5 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime6.xpm", &img_width, &img_height);
+	game->tabimg = malloc(4096 * 42);
+	game->tabimg[0] = game->img_c = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime1.xpm", &img_width, &img_height);
+	game->tabimg[1] = game->img_c1 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime2.xpm", &img_width, &img_height);
+	game->tabimg[2] = game->img_c2 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime3.xpm", &img_width, &img_height);
+	game->tabimg[3] = game->img_c3 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime4.xpm", &img_width, &img_height);
+	game->tabimg[4] = game->img_c4 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime5.xpm", &img_width, &img_height);
+	game->tabimg[5] = game->img_c5 = mlx_xpm_file_to_image(game->window.mlx, "sprites/Slime6.xpm", &img_width, &img_height);
 	while (game->map.goodmap[i] != NULL)
 	{
 		while (game->map.goodmap[i][j] != '\n')
 		{
 			if (game->map.goodmap[i][j] == 'C')
 			{
-				//manage_image(game, "sprites/Slime1.xpm", i, j);
-				mlx_put_image_to_window(game->window.mlx, game->window.win, game->img_c, img_width * j, img_height * i);
+				printf("%d\n", game->x_slime);
+				mlx_put_image_to_window(game->window.mlx, game->window.win, game->tabimg[game->x_slime], img_width * j, img_height * i);
 			}
+			if (game->x_slime == 5)
+				game->x_slime = 0;
 			j++;
 		}
 		j = 0;
 		i++;
 	}
+	game->x_slime++;
 }
 
 void	display_e(t_game *game)

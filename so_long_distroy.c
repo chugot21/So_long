@@ -14,7 +14,6 @@
 
 void    distroy_all(t_game *game)
 {
-    //free(); map1 et map2
     mlx_destroy_image(game->window.mlx, game->img_0);
     mlx_destroy_image(game->window.mlx, game->img_1);
     mlx_destroy_image(game->window.mlx, game->img_e);
@@ -29,7 +28,8 @@ void    distroy_all(t_game *game)
     mlx_destroy_image(game->window.mlx, game->img_p2);
     mlx_destroy_image(game->window.mlx, game->img_p3);
     mlx_destroy_image(game->window.mlx, game->img_p4);
-
+    free(game->map.map);
+    free(game->map.goodmap);
     mlx_destroy_window(game->window.mlx, game->window.win);
     mlx_destroy_display(game->window.mlx);
 }

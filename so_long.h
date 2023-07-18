@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+//# include <time.h>
 
 typedef struct s_point
 {
@@ -43,11 +44,13 @@ typedef struct s_window
 
 typedef	struct s_game
 {
+	int		x_slime;
 	int		count_slimes;
 	int		total_slimes;
 	int		moves;
 	int		clock_begin;
 	int		flag_portal;
+	void	**tabimg;
 	void	*img_0;
 	void	*img_1;
 	void	*img_e;
@@ -61,10 +64,12 @@ typedef	struct s_game
 	void	*img_p1;
 	void	*img_p2;
 	void	*img_p3;
-	void	*img_p4;	
+	void	*img_p4;
+	int why_not;	
 	t_window	window;
 	t_point	player;
 	t_map	map;
+	//time_t	begin;
 }	t_game;
 
 int	manage_image(t_game *game, char *xpm_file, int x, int y);
@@ -79,7 +84,7 @@ void	display_c(t_game *game);
 void	display_e(t_game *game);
 void    distroy_all(t_game *game);
 void    destroy_enemy(t_game *game);
-int    slimes_animation(t_game *game);
+void    slimes_animation(t_game *game);
 
 int	move_player(int keycode, t_game *game);
 void    count_slimes(t_game *game);
@@ -87,7 +92,11 @@ void    count_slimes(t_game *game);
 int	closew(t_game *game);
 void    end_enemy(t_game *game);
 void    end_win(t_game *game);
-
+void	display_one(t_game *game);
+void	display_e(t_game *game);
+void	display_x(t_game *game);
+void	display_p(t_game *game);
+void	display_c(t_game *game);
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *str, int c);
 int	ft_strchr_x(const char *str, int c);

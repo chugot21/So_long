@@ -17,7 +17,7 @@ void	check_ber(char **argv)
 	char *s2;
 
 	s2 = ".ber";
-	if (ft_strcmp(&argv[1][ft_strlen(argv[1] - 4)], s2) != 0)
+	if (ft_strcmp(&argv[1][ft_strlen(argv[1]) - 4], s2) != 0)
 	{
 			write(1, "Error file is not a .ber\n", 25);
 			exit (0);
@@ -88,6 +88,7 @@ void	initialisations(t_game *game)
 	game->total_slimes = 0;
 	game->moves = 0;
 	game->flag_portal = 0;
+	game->x_slime = 0;
 	find_c(game);
 }
 
@@ -97,21 +98,31 @@ int	main(int argc, char **argv)
 	t_window	window;
 	t_map		map;
 	t_point player;
+	//time_t begin;
 
+	//game.begin = time(NULL);
 	check_ber(argv);
 	treat_map(argv, &map);
 	game.window = window;
 	game.player = player;
 	game.map = map;
+	game.why_not = 1;
+	//game.time = begin;
 	initialisations(&game);
 	game.window.mlx = mlx_init();
 	game.window.win = mlx_new_window(game.window.mlx, (32 * (game.map.countchar - 1)), (32 * (game.map.countline)), "So_long");
-	mlx_hook(game.window.win, 17, 1L<<9, closew, &game);
+	
+	//mlx_loop_hook(game.window.win, slimes_animation, &game);
+
+	
+
 	display_map(&game);
 	mlx_hook(game.window.win, 2, 1L<<0, move_player, &game);
-	mlx_loop_hook(game.window.win, slimes_animation, &game);
+	mlx_hook(game.window.win, 17, 1L<<9, closew, &game);
 	mlx_loop(game.window.mlx);
 	distroy_all(&game);
+	
 }
 
-//usleep pour animation
+//usleep pour animation -> trop galere
+//animer mipas et animer quand C et X.
