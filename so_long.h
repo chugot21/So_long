@@ -6,7 +6,7 @@
 /*   By: clara <clara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:07:13 by chugot            #+#    #+#             */
-/*   Updated: 2023/07/12 20:35:30 by clara            ###   ########.fr       */
+/*   Updated: 2023/07/20 01:24:04 by clara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <pthread.h>
 //# include <time.h>
 
 typedef struct s_point
@@ -45,34 +46,52 @@ typedef struct s_window
 typedef	struct s_game
 {
 	int		x_slime;
+	int		x_enemy;
+	int		x_portal;
+	int		flag_kill;
 	int		count_slimes;
 	int		total_slimes;
 	int		moves;
 	int		clock_begin;
-	int		flag_portal;
-	void	**tabimg;
 	void	*img_0;
 	void	*img_1;
+	void	**tabimge;
 	void	*img_e;
+	void	*img_e1;
+	void	*img_e2;
+	void	*img_e3;
+	void	*img_rip;
+	void	**tabimgc;
 	void	*img_c;
 	void	*img_c1;
 	void	*img_c2;
 	void	*img_c3;
 	void	*img_c4;
 	void	*img_c5;
+	void	**tabimgx;
 	void	*img_x;
+	void	*img_x1;
+	void	*img_x2;
+	void	*img_x3;
+	void	*img_x4;
+	void	*img_x5;
 	void	*img_p1;
 	void	*img_p2;
 	void	*img_p3;
 	void	*img_p4;
-	int why_not;	
+	void	*img_p1a;
+	void	*img_p2a;
+	void	*img_p3a;
+	void	*img_p4a;
+	int why_not;
+	int	thread;
+	pthread_t	thread_anim;	
 	t_window	window;
 	t_point	player;
 	t_map	map;
 	//time_t	begin;
 }	t_game;
 
-int	manage_image(t_game *game, char *xpm_file, int x, int y);
 char	**ft_map(t_map *map, int fd, int fd1, int fd2);
 void	ft_map_copy(t_map *map);
 char	*get_next_line(int fd);
@@ -84,19 +103,20 @@ void	display_c(t_game *game);
 void	display_e(t_game *game);
 void    distroy_all(t_game *game);
 void    destroy_enemy(t_game *game);
-void    slimes_animation(t_game *game);
+//void    slimes_animation(t_game *game);
 
 int	move_player(int keycode, t_game *game);
 void    count_slimes(t_game *game);
 
-int	closew(t_game *game);
-void    end_enemy(t_game *game);
-void    end_win(t_game *game);
 void	display_one(t_game *game);
 void	display_e(t_game *game);
 void	display_x(t_game *game);
 void	display_p(t_game *game);
 void	display_c(t_game *game);
+int	closew(t_game *game);
+void    end_enemy(t_game *game);
+void    end_win(t_game *game);
+
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *str, int c);
 int	ft_strchr_x(const char *str, int c);

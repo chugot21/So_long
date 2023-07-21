@@ -6,7 +6,7 @@
 /*   By: clara <clara@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 14:21:18 by chugot            #+#    #+#             */
-/*   Updated: 2023/07/12 20:39:02 by clara            ###   ########.fr       */
+/*   Updated: 2023/07/20 23:33:20 by clara            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,25 @@ void	initialisations(t_game *game)
 	game->count_slimes = 0;
 	game->total_slimes = 0;
 	game->moves = 0;
-	game->flag_portal = 0;
 	game->x_slime = 0;
+	game->x_enemy = 0;
+	game->x_portal = 0;
+	game->flag_kill = 0;
+	game->thread = 0;
 	find_c(game);
 }
+
+/*void	*animation(t_game *game)
+{
+	while (1)
+	{
+		display_c(game);
+    	display_x(game);
+    	display_e(game);
+		usleep(100000);
+	}
+	return (NULL);
+}*/
 
 int	main(int argc, char **argv)
 {
@@ -111,18 +126,10 @@ int	main(int argc, char **argv)
 	initialisations(&game);
 	game.window.mlx = mlx_init();
 	game.window.win = mlx_new_window(game.window.mlx, (32 * (game.map.countchar - 1)), (32 * (game.map.countline)), "So_long");
-	
-	//mlx_loop_hook(game.window.win, slimes_animation, &game);
-
-	
-
 	display_map(&game);
 	mlx_hook(game.window.win, 2, 1L<<0, move_player, &game);
 	mlx_hook(game.window.win, 17, 1L<<9, closew, &game);
+	//game.thread = pthread_create (&game.thread_anim, NULL, animation, (void *)&game);
 	mlx_loop(game.window.mlx);
-	distroy_all(&game);
-	
+	//distroy_all(&game);
 }
-
-//usleep pour animation -> trop galere
-//animer mipas et animer quand C et X.
