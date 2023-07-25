@@ -13,18 +13,25 @@
 NAME =	so_long
 
 SRCS =	so_long.c \
+		so_long_initialisation.c \
 		so_long_map.c \
 		so_long_error_map.c \
+		so_long_error_map_bis.c \
 		get_next_line.c \
 		so_long_utils.c \
+		so_long_utils_bis.c \
 		so_long_display.c \
+		so_long_display_bis.c \
+		so_long_display_bis_two.c \
+		so_long_display_anim.c \
 		so_long_player_moves.c \
+		so_long_player_moves_bis.c \
 		so_long_ends.c \
 		so_long_distroy.c \
 
 CC = cc
 
-FLAGS =	-g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 
 OBJS = $(SRCS:.c=.o)
 
